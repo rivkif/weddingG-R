@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ספירה לאחור לחתונה של גרשי ורבקי</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Assistant:wght@700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Assistant', sans-serif;
+      background-color: #1a1a1a;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 3rem;
+      max-width: 800px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      position: relative;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    h1 {
+      font-family: 'Amatic SC', cursive;
+      font-size: 4.5rem;
+      color: #ff69b4;
+      margin-bottom: 2rem;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4; }
+      to { text-shadow: 0 0 20px #00d2ff, 0 0 40px #00d2ff, 0 0 60px #00d2ff; }
+    }
+
+    .countdown {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .time-unit {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      font-size: 2.5rem;
+    }
+
+    .number {
+      font-size: 5rem;
+      color: #ffdd57;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 1.5rem;
+      color: #ff69b4;
+      margin-top: 0.5rem;
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 1.8rem;
+      color: #ff69b4;
+      opacity: 0.7;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      50% { transform: translateY(-100px) rotate(180deg); opacity: 0.8; }
+      100% { transform: translateY(0) rotate(360deg); opacity: 0.5; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>החתונה של גרשי ורבקי</h1>
+    <div class="countdown">
+      <div class="time-unit">
+        <div class="number" id="days">0</div>
+        <div class="label">ימים</div>
+      </div>
+      <div class="time-unit">
+        <div class="number" id="hours">0</div>
+        <div class="label">שעות</div>
+      </div>
+      <div class="time-unit">
+        <div class="number" id="minutes">0</div>
+        <div class="label">דקות</div>
+      </div>
+      <div class="time-unit">
+        <div class="number" id="seconds">0</div>
+        <div class="label">שניות</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const targetDate = new Date('2025-02-20T00:00:00').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+
+    function createSparkles() {
+      for (let i = 0; i < 10; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = `${Math.random() * 100}vw`;
+        sparkle.style.top = `${Math.random() * 100}vh`;
+        sparkle.textContent = '👰🤵‍♂️';
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 3000);
+      }
+    }
+
+    setInterval(updateCountdown, 1000);
+    setInterval(createSparkles, 1000);
+  </script>
+</body>
+</html>
